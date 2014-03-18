@@ -17,14 +17,6 @@ app.use(logfmt.requestLogger());
 
 
 
-
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
-
-
-
 app.configure( function() { 
 	/*
 	   use a directory called js in your project directory
@@ -96,4 +88,10 @@ app.post('/long/:long', function (request, response) {
 	});
  });
 
+
+
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
 
