@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<script src="/socket.io/socket.io.js"></script>
-	<script>
-		// open a connection to the serial server:
-		var socket = io.connect('http://localhost:8080');
-		var outputValue = false;		// value to send to the server
-		
-		 // when you get a serialdata event, do this:
-		socket.on('serialEvent', function (data) {
-			// set the stuff inside the element's HTML tags to
-			// whatever the 'value' property of the received data is:
-			textDisplay.innerHTML = data;
-		});
-		
-		// send data back to the server:
-		function heartBeat() {
-			// if ledState is true, output = 1. Else output = 0:
-			var output = outputValue ? '1':'0';
-			// send output back to the client:
-			socket.emit('data', output);
-			// toggle outputValue:
-			outputValue = !outputValue;
-		}
-		
-		// start an interval timer to run heartBeat() every two seconds:
-		setInterval(heartBeat, 2000);
-	</script>
+	 <script type="text/javascript" src="js/zepto.min.js"></script>
 
+	<script type="text/javascript">
+		var times,
+			lat,
+			lon;
+
+		function getTimeStamp(){
+			myDate = new Date();
+			timeStamp = myDate.getTime();
+			//console.log(timeStamp);
+		}	
+		
+		function getLocation(){
+
+			if (navigator.geolocation){
+  				navigator.geolocation.getCurrentPosition(displayPosition);
+  
+			} else{
+  				geo.innerHTML = "Geolocation is not supported by your browser!";
+  			}
+		}
+		function displayPosition(position){
+			lat = position.coords.latitude;
+			lon = position.coords.longitude;
+			getTimeStamp();
+		}
+
+		//this function makes an HTTP GET request for /name/username		
+		function submitName(myName) {
+			$.post("/name/" + myName);	
+			$.post("/times/" + timeStamp);	
+			$.post("/lat/" + lat);	
+			$.post("/long/" + lon);		
+		}
+	</script>
+	
 	</head>
-	<body>
-	And the latest value from the server is:
-	<div id="textDisplay">Text will show up here</div>
+	<body onload="getLocation();">
+	
+	<div id="time"></div>
+	What's your name: 
+	<input type="text" id="username" size=50><br>
+
+
+	<button id="submitName" onclick="submitName(username.value);">Submit</button>
 	</body>
 </html>
