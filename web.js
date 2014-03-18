@@ -45,7 +45,7 @@ app.get('/index*', function (request, response) {
 });
 
 
-app.post('/submit/name/:name/times/:times/lat/:lat/long/:long', function(req,res) {
+app.get('/submit/name/:name/times/:times/lat/:lat/long/:long', function(req,res) {
 	var clientName  = request.params.name;
 	var clientTimes  = request.params.times;
 	var clientLat  = request.params.lat;
