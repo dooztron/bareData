@@ -45,7 +45,7 @@ app.get('/index*', function (request, response) {
 });
 
 
-app.get('/submit/name/:name/times/:times/lat/:lat/long/:long', function(req,res) {
+app.get('/submit/name/:name/times/:times/lat/:lat/long/:long', function(request,response) {
 	var clientName  = request.params.name;
 	var clientTimes  = request.params.times;
 	var clientLat  = request.params.lat;
@@ -67,10 +67,10 @@ app.get('/submit/name/:name/times/:times/lat/:lat/long/:long', function(req,res)
 	fs.appendFile(outputFilename, data, function(err) {
     	if(err) {
       		console.log(err);
-      		res.send(err);
+      		response.send(err);
     	} else {
       		console.log("JSON saved to " + outputFilename);
-      		res.send(data);
+      		response.send(data);
     	}
 	});
 });
