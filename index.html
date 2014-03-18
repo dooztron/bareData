@@ -31,7 +31,7 @@
 
 		//this function makes an HTTP GET request for /name/username		
 		function submitName(myName) {
-			$.post("/submit/name/" + myName + "/times/" + timeStamp + "/lat/" + lat + "/long/" + lon, function(data) {
+			$.get("/submit/name/" + myName + "/times/" + timeStamp + "/lat/" + lat + "/long/" + lon, function(data) {
 					console.log(data);
 
 			});		
