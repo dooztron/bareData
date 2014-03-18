@@ -44,6 +44,9 @@ app.get('/index*', function (request, response) {
    response.sendfile('index.html');
 });
 
+app.get('/data', function (request, response) {
+	response.sendfile('superpoops.json');
+});
 
 app.get('/submit/name/:name/times/:times/lat/:lat/long/:long', function(request,response) {
 	var clientName  = request.params.name;
