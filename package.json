@@ -1,0 +1,27 @@
+{
+  "name": "bareData",
+  "version": "0.0.0",
+  "description": "superpoops",
+  "main": "web.js",
+  "dependencies": {
+    "express": "~3.4.8",
+    "logfmt": "~1.0.0-pre"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dooztron/bareData.git"
+  },
+  "keywords": [
+    "test",
+    "heroku"
+  ],
+  "author": "Xuedi",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/dooztron/bareData/issues"
+  }
+}
