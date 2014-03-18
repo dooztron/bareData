@@ -31,10 +31,10 @@
 
 		//this function makes an HTTP GET request for /name/username		
 		function submitName(myName) {
-			$.post("/name/" + myName);	
-			$.post("/times/" + timeStamp);	
-			$.post("/lat/" + lat);	
-			$.post("/long/" + lon);		
+			$.post("/submit/name/" + myName + "/times/" + timeStamp + "/lat/" + lat + "/long/" + lon, function(data) {
+					console.log(data);
+
+			});		
 		}
 	</script>
 	

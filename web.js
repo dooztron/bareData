@@ -2,11 +2,11 @@
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express(),
-	clientName,
-	clientTimes,
-	clientLat,
-	clientLong,
-	myIP,
+	// clientName,
+	// clientTimes,
+	// clientLat,
+	// clientLong,
+	// myIP,
 	fs = require('fs');
 
 app.use(logfmt.requestLogger());
@@ -43,37 +43,22 @@ app.get('/', function (request, response) {
 app.get('/index*', function (request, response) {
    response.sendfile('index.html');
 });
- 
-// if the request is for /name/Joe, or /name/Jane, then express.js
-// will treat the second element of the address string as the name:
-app.post('/name/:name', function (request, response) {
-	clientName  = request.params.name;
-	console.log(clientName);
- });
 
-app.post('/times/:times', function (request, response) {
-	clientTimes  = request.params.times;
-	console.log(clientTimes);
- });
 
-app.post('/lat/:lat', function (request, response) {
-	clientLat  = request.params.lat;
-	console.log(clientLat);
- });
-
-app.post('/long/:long', function (request, response) {
-	clientLong  = request.params.long;
-	console.log(clientLong);
-
-	myIP = request.ip;    //get IP address
+app.post('/submit/name/:name/times/:times/lat/:lat/long/:long', function(req,res) {
+	var clientName  = request.params.name;
+	var clientTimes  = request.params.times;
+	var clientLat  = request.params.lat;
+	var clientLong  = request.params.long;
+	var myIP = request.ip;    //get IP address
 
 
 	var myData = {
-	name: clientName,
-	ip: myIP,
-	time: parseInt(clientTimes),
-  	lat: parseFloat(clientLat),
-  	lon: parseFloat(clientLong),
+		name: clientName,
+		ip: myIP,
+		time: parseInt(clientTimes),
+	  	lat: parseFloat(clientLat),
+	  	lon: parseFloat(clientLong)
 	};
 	
 	var outputFilename = './superpoops.json';
@@ -82,11 +67,13 @@ app.post('/long/:long', function (request, response) {
 	fs.appendFile(outputFilename, data, function(err) {
     	if(err) {
       		console.log(err);
+      		res.send(err);
     	} else {
       		console.log("JSON saved to " + outputFilename);
+      		res.send(data);
     	}
 	});
- });
+});
 
 
 
