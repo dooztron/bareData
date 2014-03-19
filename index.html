@@ -27,11 +27,12 @@
 			lat = position.coords.latitude;
 			lon = position.coords.longitude;
 			getTimeStamp();
+			submitName();
 		}
 
 		//this function makes an HTTP GET request for /name/username		
-		function submitName(myName) {
-			$.get("/submit/name/" + myName + "/times/" + timeStamp + "/lat/" + lat + "/long/" + lon, function(data) {
+		function submitName() {
+			$.get("/logdata/name/" + "xuedi" + "/times/" + timeStamp + "/lat/" + lat + "/long/" + lon, function(data) {
 					console.log(data);
 
 			});		
@@ -40,12 +41,7 @@
 	
 	</head>
 	<body onload="getLocation();">
-	
 	<div id="time"></div>
-	What's your name: 
-	<input type="text" id="username" size=50><br>
-
-
-	<button id="submitName" onclick="submitName(username.value);">Submit</button>
+	What's my location?: 
 	</body>
 </html>
