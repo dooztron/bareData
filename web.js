@@ -45,8 +45,7 @@ app.get('/logdata/name/:name/times/:times/lat/:lat/long/:long', function(request
 	};
 	
 	var outputFilename = './superpoops.json';
-	var data = [];
-	data[0] = JSON.stringify(myData, null, 4) + "," + '\r';
+	var data = JSON.stringify(myData, null, 4) + "," + '\r';
 
 	fs.appendFile(outputFilename, data, function(err) {
     	if(err) {
